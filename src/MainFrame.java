@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,17 +7,28 @@ import java.awt.event.WindowEvent;
 
 public class MainFrame extends Frame {
     private Button btnadd=new Button("add");
+    private Button btnsub=new Button("sub");
+    private Button btnexit=new Button("exit");
+    private Button btnmove=new Button("move");
     private Label lab=new Label(">0<");
-    int count=0;
+    private int count=0,labX=150,labY=100;
+    private Timer t1;
+
     public MainFrame(){
         init();
     }
     private void init(){
-        this.setBounds(100,100,500,300);
+        this.setBounds(100,100,600,400);
         this.setLayout(null);
         btnadd.setBounds(150,150,100,30);
+        btnsub.setBounds(270,150,100,30);
+        btnexit.setBounds(390,150,100,30);
+        btnmove.setBounds(20,150,100,30);
         this.add(btnadd);
-        lab.setBounds(150,160,100,60);
+        this.add(btnsub);
+        this.add(btnexit);
+        this.add(btnmove);
+        lab.setBounds(labX,labY,100,60);
         this.add(lab);
 
         this.addWindowListener(new WindowAdapter() {
@@ -28,9 +40,35 @@ public class MainFrame extends Frame {
         btnadd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+//                t1.start();
                 MainFrame.this.setTitle(Integer.toString(++count));
                 lab.setText(Integer.toString(count));
+            }
+        });
+        btnsub.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.this.setTitle(Integer.toString(--count));
+                lab.setText(Integer.toString(count));
+            }
+        });
+        btnexit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        btnmove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                t1.start();
+            }
+        });
+        t1=new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                labX +=5;
+                lab.setLocation(labX,labY);
             }
         });
 
