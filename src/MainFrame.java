@@ -11,6 +11,7 @@ public class MainFrame extends Frame {
     private Button btnexit=new Button("exit");
     private Button btnmove=new Button("move");
     private Label lab=new Label(">0<");
+    private boolean bl=true;
     private int count=0,labX=150,labY=100;
     private Timer t1;
 
@@ -64,11 +65,22 @@ public class MainFrame extends Frame {
                 t1.start();
             }
         });
-        t1=new Timer(100, new ActionListener() {
+        t1=new Timer(50, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                labX +=5;
-                lab.setLocation(labX,labY);
+                if (bl==false) {
+                    labX -= 5;
+                    lab.setLocation(labX, labY);
+                    if(labX==0)
+                        bl=true;
+                }
+                if (bl == true) {
+                        labX += 5;
+                        lab.setLocation(labX, labY);
+                    if(labX==570){
+                        bl=false;
+                    }
+                }
             }
         });
 
