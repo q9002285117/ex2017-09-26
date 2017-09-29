@@ -29,7 +29,8 @@ public class MainFrame extends Frame {
         this.add(btnsub);
         this.add(btnexit);
         this.add(btnmove);
-        lab.setBounds(labX,labY,100,60);
+        lab.setBounds(labX,labY,30,30);
+        lab.setBackground(Color.PINK);
         this.add(lab);
 
         this.addWindowListener(new WindowAdapter() {
@@ -65,13 +66,13 @@ public class MainFrame extends Frame {
                 t1.start();
             }
         });
-        t1=new Timer(50, new ActionListener() {
+        t1=new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (bl==false) {
                     labX -= 5;
                     lab.setLocation(labX, labY);
-                    if(labX==0)
+                    if(labX==10)
                         bl=true;
                 }
                 if (bl == true) {
